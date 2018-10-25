@@ -26,10 +26,10 @@ function gameLoop (timeStamp) {
 	let deltaTime = timeStamp - lastTime;
 	lastTime = timeStamp;
 	ctx.clearRect(0,0, game_width, game_height);
-	paddle.update(deltaTime);
-	paddle.draw(ctx);
-	ball.update(deltaTime);
-	ball.draw(ctx);
+
+	game.update(deltaTime);
+	game.draw(ctx);
+	
 
 	requestAnimationFrame(gameLoop);
 }
