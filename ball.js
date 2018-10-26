@@ -6,12 +6,15 @@ export default class Ball {
 		this.gameWidth = game.gameWidth;
 		this.gameHeight = game.gameHeight;
 		this.game = game;
+		this.reset();
+	}
+	reset() {
 		this.position = {
 			x: this.gameWidth/2,
 			y: this.gameHeight - this.rad - 20
 		}
 		this.speed = {
-			x: 2,
+			x: 4,
 			y: 2
 		}
 	}
@@ -31,9 +34,14 @@ export default class Ball {
 		if (this.position.x-this.rad/4 < 0 || this.position.x > this.gameWidth-this.rad/4) {
 			this.speed.x = -this.speed.x;
 		}
-		//if ball hits top/bottom border
-		if (this.position.y-this.rad/4 < 0 || this.position.y+this.rad/4 > this.gameHeight) {
+		//if ball hits top border
+		if (this.position.y-this.rad/4 < 0) {
 			this.speed.y = -this.speed.y;
+		}
+		//if ball hits bottom border
+		if (this.position.y+this.rad/4 > this.gameHeight) {
+			this.game.lives--;
+			this.reset();
 		}
 		//if ball hits paddle
 		if (collideLogic(this, this.game.paddle)) {
