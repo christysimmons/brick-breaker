@@ -1,3 +1,4 @@
+import {collideLogic} from "./collision-detection.js";
 
 
 export default class Brick {
@@ -11,7 +12,7 @@ export default class Brick {
 		this.r = Math.floor(Math.random() * 256);
 		this.g = Math.floor(Math.random() * 256);
 		this.b = Math.floor(Math.random() * 256);
-
+		this.futureDelete = false;
 	}
 
 	draw(ctx) {
@@ -20,6 +21,9 @@ export default class Brick {
 	}
 
 	update() {
-
+		if(collideLogic(this.game.ball, this)) {
+			this.game.ball.speed.y = -this.game.ball.speed.y;
+			this.futureDelete = true;
+		}
 	}
 }

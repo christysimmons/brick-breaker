@@ -12,7 +12,7 @@ const game_width = 800;
 const game_height = 600;
 
 let game = new Game(game_width, game_height);
-game.start();
+//game.state = game.playState.menu;
 
 
 let lastTime = 0;

@@ -1,3 +1,5 @@
+import {collideLogic} from "./collision-detection.js";
+
 export default class Ball {
 	constructor (game) {
 		this.rad = 35;
@@ -33,19 +35,12 @@ export default class Ball {
 		if (this.position.y-this.rad/4 < 0 || this.position.y+this.rad/4 > this.gameHeight) {
 			this.speed.y = -this.speed.y;
 		}
-
-		//collision with paddle
-		let ballEnd = this.position.y+this.rad/4;
-		let paddleTop = this.game.paddle.position.y;
-		let paddleLeft = this.game.paddle.position.x;
-		let paddleRight = this.game.paddle.position.x + this.game.paddle.width;
-
-		if (ballEnd >= paddleTop 
-			&& paddleLeft < this.position.x 
-			&& this.position.x < paddleRight) {
+		//if ball hits paddle
+		if (collideLogic(this, this.game.paddle)) {
 			this.speed.y = -this.speed.y;
-			this.position.y = paddleTop - this.rad/4;
+			this.position.y = this.position.y - this.rad/4
 		}
+
 	}
 
 }
