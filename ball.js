@@ -40,7 +40,9 @@ export default class Ball {
 		let paddleLeft = this.game.paddle.position.x;
 		let paddleRight = this.game.paddle.position.x + this.game.paddle.width;
 
-		if (ballEnd >= paddleTop) {
+		if (ballEnd >= paddleTop 
+			&& paddleLeft < this.position.x 
+			&& this.position.x < paddleRight) {
 			this.speed.y = -this.speed.y;
 			this.position.y = paddleTop - this.rad/4;
 		}
